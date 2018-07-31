@@ -2,15 +2,8 @@ import { Flow } from './flow/flow';
 import { FlowConfig } from './flow/flow-config';
 import { Rest } from './rest/rest';
 
-class Forcible {
+export class Forcible {
   private _flow: Flow;
-  set config(flowConfig: FlowConfig) {
-    if (!this._flow) {
-      this._flow = new Flow(flowConfig);
-    } else {
-      this._flow.config = flowConfig;
-    }
-  }
   get flow(): Flow {
     return this._flow;
   }
@@ -23,7 +16,17 @@ class Forcible {
     }
     return this._rest;
   }
-}
 
-const forcible = new Forcible();
-export default forcible;
+  get version() {
+    const packageJson = require(__dirname + '/package.json');
+    return packageJson.version;
+  }
+
+  setConfig(flowConfig: FlowConfig) {
+    if (!this._flow) {
+      this._flow = new Flow(flowConfig);
+    } else {
+      this._flow.config = flowConfig;
+    }
+  }
+}

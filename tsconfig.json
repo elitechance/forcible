@@ -11,8 +11,8 @@
     "declarationDir": "./dist",
     "outDir": "dist",
     "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "experimentalDecorators": false,
+    "emitDecoratorMetadata": false
   },
   "include": ["src/**/*"]
 }
