@@ -14,11 +14,11 @@ var forcible = require('forcible');
 function main() {
   var clientId = '<SALESFORCE_CLIENT_ID>';
   var clientSecret = '<SALESFORCE_CLIENT_SECRET>';
-  forcible.config = {
+  forcible.setConfig({
     useSandbox: true,
     clientId: clientId,
     clientSecret: clientSecret
-  };
+  });
   var username = '<SALESFORCE_USERNAME>';
   var password = '<SALESFORCE_PASSWORD>' + '<SALESFORCE_TOKEN>';
   try {
