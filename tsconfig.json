@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "es2015", "es2016"],
+    "strictPropertyInitialization": false,
+    "noImplicitAny": false,
+    "module": "commonjs",
+    "sourceMap": false,
+    "strict": true,
+    "declaration": true,
+    "declarationDir": "./dist",
+    "outDir": "dist",
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "include": ["src/**/*"]
+}

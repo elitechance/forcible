@@ -1,0 +1,30 @@
+{
+  "name": "forcible",
+  "version": "1.0.0-alpha.0",
+  "description": "Salesforce REST API Library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elitechance/forcible.git"
+  },
+  "keywords": [
+    "salesforce",
+    "rest api"
+  ],
+  "author": "Ethan Dave B. Gomez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/elitechance/forcible/issues"
+  },
+  "homepage": "https://github.com/elitechance/forcible#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^10.5.4",
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.1"
+  }
+}
