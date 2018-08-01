@@ -4,7 +4,6 @@ import { Flow } from '../flow/flow';
 import { HttpClient } from '../http/client';
 import { HttpResponse } from '../http/response';
 
-// Reference: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_list.htm
 export class Rest {
   private DEFAULT_SERVICE = '/services/data/v20.0';
   private _flow: Flow;
@@ -125,27 +124,30 @@ export class Rest {
     return this.serviceResponse(response);
   }
 
-  async sObjectRows(objectName: string, id: string) {
-    const response = await this.serviceReq(
-      this._servicePath + '/sobjects/' + objectName + '/' + id
-    );
+  async sObjectRows(objectName: string, id: string, fields?: string[]) {
+    let query = this._servicePath + '/sobjects/' + objectName + '/' + id;
+    if (fields) {
+      query += '/?fields=' + fields.join(',');
+    }
+    const response = await this.serviceReq(query);
     return this.serviceResponse(response);
   }
 
   async sObjectRowsByExternalId(
     objectName: string,
     fieldName: string,
-    fieldValue: string
+    fieldValue: string,
+    method?: string
   ) {
-    const response = await this.serviceReq(
+    const query =
       this._servicePath +
-        '/sobjects/' +
-        objectName +
-        '/' +
-        fieldName +
-        '/' +
-        fieldValue
-    );
+      '/sobjects/' +
+      objectName +
+      '/' +
+      fieldName +
+      '/' +
+      fieldValue;
+    const response = await this.serviceReq(query, method);
     return this.serviceResponse(response);
   }
 
@@ -190,7 +192,30 @@ export class Rest {
   // TODO
   // sObjectRelationship
   // sObjectBlobRetrieve
-  // sObjectQuickActions
+
+  async sObjectQuickActions(
+    objectName: string,
+    actionName?: string,
+    option?: string,
+    parentId?: string,
+    postData?: any,
+    method?: string
+  ) {
+    let query = this._servicePath + '/sobjects/' + objectName + '/quickActions';
+    if (actionName) {
+      query += '/' + actionName;
+    }
+    if (option) {
+      query += '/' + option;
+    }
+    if (parentId) {
+      query += '/' + parentId;
+    }
+    const response = await this.serviceReq(query, method, postData);
+    return this.serviceResponse(response);
+  }
+
+  // TODO
   // sObjectSuggestedArticles
   // sObjectUserPassword
   // platformEventSchemaByEventName
@@ -219,9 +244,8 @@ export class Rest {
   }
 
   async quickActions() {
-    const response = await this.serviceReq(
-      this._servicePath + '/quickActions/'
-    );
+    const query = this._servicePath + '/quickActions/';
+    const response = await this.serviceReq(query);
     return this.serviceResponse(response);
   }
 

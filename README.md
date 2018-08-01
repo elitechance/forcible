@@ -1,5 +1,7 @@
 # forcible
 
+NodeJS client for Salesforce REST API
+
 ## Installation
 
 ```bash
@@ -40,9 +42,9 @@ main();
 
 ```typescript
 import * as forcible from 'forcible';
-...
 
 async function main() {
+...
   try {
     await forcible.flow.usernamePassword(username, password);
     console.log('Authenticated', forcible.flow.isAuthenticated);
@@ -64,6 +66,48 @@ main();
 
 ## Common REST calls
 
-- forcible.rest.`createRecord`(objectName: string, recordInfo: any);
-- forcible.rest.`updateRecord`(objectName: string, id: string, recordInfo: any);
-- forcible.rest.`deleteRecord`(objectName: string, id: string);
+- forcible.rest.`createRecord`(objectName: string, recordInfo: any)
+- forcible.rest.`updateRecord`(objectName: string, id: string, recordInfo: any)
+- forcible.rest.`deleteRecord`(objectName: string, id: string)
+
+```typescript
+...
+try {
+  const id = '001W000000fMa9fIAC'
+  const response = await forcible.rest.updateRecord('Account', id, {BillingCity: 'New City'})
+  if (!response.error) {
+    console.log('Update success', id)
+  }
+} catch (error) {
+  console.log(error)
+}
+...
+```
+
+## Other methods found in [Salesforce reference](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_list.htm)
+
+- forcible.rest.`version`()
+- forcible.rest.`resourceByVersion`()
+- forcible.rest.`limits`()
+- ...
+- forcible.rest.`sobjectRows`(objectName: string, id: string, fields?: string[])
+- ...
+
+## TODO
+
+- sObjectGetDeleted
+- sObjectGetUpdated
+- sObjectRelationship
+- sObjectBlobRetrieve
+- sObjectSuggestedArticles
+- sObjectUserPassword
+- platformEventSchemaByEventName
+- platformEventSchemaById
+- appMenu
+- compactLayouts
+- invocableActions
+- parameterizedSearch
+- processApprovals
+- processRules
+- searchSuggestedArticleTitleMatches
+- searchSuggestedQueries
