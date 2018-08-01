@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.0-beta.0
+
+- Support for CRUD operations
+
 ## 1.0.0-alpha.2
 
 - Fix example in readme

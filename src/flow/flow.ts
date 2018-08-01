@@ -32,7 +32,7 @@ export class Flow {
       password: password
     };
     try {
-      const response = await HttpClient.post(path, credentials);
+      const response = await HttpClient.form(path, credentials);
       if (response && response.body) {
         const parseResponse: FlowResponse = JSON.parse(response.body);
         if (parseResponse.error) {

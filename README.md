@@ -35,3 +35,35 @@ function main() {
 
 main();
 ```
+
+## Using Typescript
+
+```typescript
+import * as forcible from 'forcible';
+...
+
+async function main() {
+  try {
+    await forcible.flow.usernamePassword(username, password);
+    console.log('Authenticated', forcible.flow.isAuthenticated);
+
+    const latestVersion = await forcible.rest.latestVersion();
+    forcible.rest.servicePath = latestVersion.url;
+    const records = await forcible.rest.query(
+      'SELECT Id, Name, BilingCity FROM Account LIMIT 5'
+    );
+    console.log(records);
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+main();
+```
+
+## Common REST calls
+
+- forcible.rest.`createRecord`(objectName: string, recordInfo: any);
+- forcible.rest.`updateRecord`(objectName: string, id: string, recordInfo: any);
+- forcible.rest.`deleteRecord`(objectName: string, id: string);
