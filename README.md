@@ -86,7 +86,7 @@ try {
 
 ## Other methods found in [Salesforce reference](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_list.htm)
 
-- forcible.rest.`version`()
+- forcible.rest.`versions`()
 - forcible.rest.`resourceByVersion`()
 - forcible.rest.`limits`()
 - ...

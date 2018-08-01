@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.0-beta.2
+
+- Fix readme error
+
 ## 1.0.0-beta.1
 
 - Support for `fields` in forcible.rest.sObjectRows()
