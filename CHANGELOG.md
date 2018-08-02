@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.0-beta.3
+
+- Add support for alternative oauth credentials
+
 ## 1.0.0-beta.2
 
 - Fix readme error

@@ -93,6 +93,15 @@ try {
 - forcible.rest.`sobjectRows`(objectName: string, id: string, fields?: string[])
 - ...
 
+## Alternative credentials
+
+You can bypass authentication (`forcible.flow.usernamePassword`) by passing OAuth credentials manually
+
+```javascript
+forcible.rest.accessToken = '<Your token here>';
+forcible.rest.instanceUrl = 'https://<instance_url>.salesforce.com';
+```
+
 ## TODO
 
 - sObjectGetDeleted

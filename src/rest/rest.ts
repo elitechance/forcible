@@ -17,6 +17,30 @@ export class Rest {
     return this._servicePath;
   }
 
+  private _accessToken: string;
+  set accessToken(token: string) {
+    this._accessToken = token;
+  }
+  get accessToken() {
+    return this._accessToken;
+  }
+
+  private _tokenType: string;
+  set tokenType(type: string) {
+    this._tokenType = type;
+  }
+  get tokenType() {
+    return this._tokenType;
+  }
+
+  private _instanceUrl: string;
+  set instanceUrl(url: string) {
+    this._instanceUrl = url;
+  }
+  get instanceUrl() {
+    return this._instanceUrl;
+  }
+
   constructor(flow: Flow) {
     this._flow = flow;
     this._servicePath = this.DEFAULT_SERVICE;
@@ -45,13 +69,9 @@ export class Rest {
       if (this._versions) {
         return this._versions;
       }
-      if (this._flow.lastResponse && this._flow.lastResponse.instance_url) {
-        const response = await this.serviceReq('/services/data/');
-        if (response.body) {
-          return JSON.parse(response.body);
-        } else {
-          return [];
-        }
+      const response = await this.serviceReq('/services/data/');
+      if (response.body) {
+        return JSON.parse(response.body);
       } else {
         return [];
       }
@@ -313,10 +333,28 @@ export class Rest {
   }
 
   private serviceReq(servicePath: string, method?: string, postData?: any) {
-    const tokenType = this._flow.lastResponse.token_type;
-    const token = this._flow.lastResponse.access_token;
+    let tokenType = 'Bearer';
+    let token;
+    let instanceUrl;
+    if (this._flow.lastResponse) {
+      if (this._flow.lastResponse.token_type) {
+        tokenType = this._flow.lastResponse.token_type;
+      }
+      token = this._flow.lastResponse.access_token;
+      instanceUrl = this._flow.lastResponse.instance_url;
+    }
+
+    if (this._tokenType) {
+      tokenType = this._tokenType;
+    }
+    if (this._accessToken) {
+      token = this._accessToken;
+    }
+    if (this._instanceUrl) {
+      instanceUrl = this._instanceUrl;
+    }
     const options = { headers: { authorization: tokenType + ' ' + token } };
-    const url = this._flow.lastResponse.instance_url + servicePath;
+    const url = instanceUrl + servicePath;
     let properMethod = 'GET';
     if (method) {
       properMethod = method;
